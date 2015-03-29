@@ -83,6 +83,7 @@ public class dadController : MonoBehaviour {
 			GameObject clone;
 			clone = Instantiate(bullets[0], followPoints[0].transform.position, followPoints[0].transform.rotation) as GameObject;
 			clone.GetComponent<hurtOther>().player = this.gameObject;
+			clone.GetComponent<moveForward>().dir = followPoints[0].transform.parent.transform.rotation;
 			p1Attacked = true;
 		} else if (Input.GetAxis("player1_attack") == 0){
 			p1Attacked = false;
@@ -90,8 +91,9 @@ public class dadController : MonoBehaviour {
 
 		if (Input.GetAxis("player2_attack") == 1 && p2Attacked == false){
 			GameObject clone;
-			clone = Instantiate(bullets[1], followPoints[1].transform.position, followPoints[0].transform.rotation) as GameObject;
+			clone = Instantiate(bullets[1], followPoints[1].transform.position, followPoints[1].transform.rotation) as GameObject;
 			clone.GetComponent<hurtOther>().player = this.gameObject;
+			clone.GetComponent<moveForward>().dir = followPoints[1].transform.parent.transform.rotation;
 			p2Attacked = true;
 		} else if (Input.GetAxis("player2_attack") == 0) {
 			p2Attacked = false;
@@ -99,8 +101,9 @@ public class dadController : MonoBehaviour {
 
 		if (Input.GetAxis("player3_attack") == 1 && p3Attacked == false){
 			GameObject clone;
-			clone = Instantiate(bullets[2], followPoints[2].transform.position, followPoints[0].transform.rotation) as GameObject;
+			clone = Instantiate(bullets[2], followPoints[2].transform.position, followPoints[2].transform.rotation) as GameObject;
 			clone.GetComponent<hurtOther>().player= this.gameObject;
+			clone.GetComponent<moveForward>().dir = followPoints[2].transform.parent.transform.rotation;
 			p3Attacked = true;
 		} else if (Input.GetAxis("player3_attack") == 0) {
 			p3Attacked = false;
@@ -108,8 +111,9 @@ public class dadController : MonoBehaviour {
 
 		if (Input.GetAxis("player4_attack") == 1 && p4Attacked == false){
 			GameObject clone;
-			clone = Instantiate(bullets[3], followPoints[3].transform.position, followPoints[0].transform.rotation) as GameObject;
+			clone = Instantiate(bullets[3], followPoints[3].transform.position, followPoints[3].transform.rotation) as GameObject;
 			clone.GetComponent<hurtOther>().player = this.gameObject;
+			clone.GetComponent<moveForward>().dir = followPoints[3].transform.parent.transform.rotation;
 			p4Attacked = true;
 		} else if (Input.GetAxis("player4_attack") == 0){
 			p4Attacked = false;

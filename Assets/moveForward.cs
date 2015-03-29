@@ -3,6 +3,7 @@ using System.Collections;
 
 public class moveForward : MonoBehaviour {
 	public float force = 50;
+	public Quaternion dir;
 	// Use this for initialization
 	void Start () {
 	
