@@ -10,8 +10,8 @@ public class testPoint : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float h = Input.GetAxis(transform.parent.GetComponent<playerControllerMovement>().playerNum + "_h");
-		float v = Input.GetAxis(transform.parent.GetComponent<playerControllerMovement>().playerNum + "_v");
+		float h = Input.GetAxis(transform.parent.GetComponent<playerControllerMovement>().playerNum + "_h2");
+		float v = Input.GetAxis(transform.parent.GetComponent<playerControllerMovement>().playerNum + "_v2");
 
 		if (h != 0 ){
 			transform.position = new Vector3 (transform.parent.transform.position.x + h, transform.position.y, transform.position.z);

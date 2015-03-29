@@ -10,7 +10,7 @@ public class changeSpriteOrder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float v = Input.GetAxis(transform.parent.transform.parent.GetComponent<playerControllerMovement>().playerNum + "_v");
+		float v = Input.GetAxis(transform.parent.GetComponent<playerControllerMovement>().playerNum + "_v2");
 		if (v > 0){
 			gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
 		} else {

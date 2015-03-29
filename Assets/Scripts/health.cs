@@ -23,24 +23,30 @@ public class health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (this.gameObject.tag == "Player") {
 		//timer goes down when invul
-		if (invul){
-			timer -= Time.deltaTime;
-			gameObject.GetComponent<Animator>().SetBool("invul", true);
-		} else {
-			gameObject.GetComponent<Animator>().SetBool("invul", false);
-		}
-		//when time is up, reset invul
-		if (timer <= 0) {
-			invul = false;
+			if (invul){
+				timer -= Time.deltaTime;
+				gameObject.GetComponent<Animator>().SetBool("invul", true);
+			} else {
+				gameObject.GetComponent<Animator>().SetBool("invul", false);
+			}
+		
+			//when time is up, reset invul
+			if (timer <= 0) {
+				invul = false;
+			}
+
+			light.GetComponent<Light>().intensity = currenthealth / 2;
+			//killMe when dead
+			
 		}
 
-		light.GetComponent<Light>().intensity = currenthealth / 2;
-		//killMe when dead
 		if (currenthealth <= 0) {
-			gameObject.GetComponent<Animator>().SetTrigger("death");
-			gameObject.GetComponent<playerControllerMovement>().isDead = true;
-		}
+			
+				gameObject.GetComponent<Animator>().SetTrigger("death");
+				gameObject.GetComponent<enemyMotor>().isDead = true;
+			}
 	}
 
 	//function called when collides with enemy

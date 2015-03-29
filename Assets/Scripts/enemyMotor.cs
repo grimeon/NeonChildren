@@ -1,60 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class playerControllerMovement : MonoBehaviour {
-
-	//Speed modifier
+public class enemyMotor : MonoBehaviour {
+//Speed modifier
 	public float speed = 10;
 	//Kockback Modifier
 	public float knockBack = 20;
-	//horizontal input
-	[HideInInspector]
-	public float h;
-	//Vertical Input
-	[HideInInspector]
-	public float v;
-	//The Player number for 
-	public string playerNum = "player1";
 
 	//variables for the sprite flipper
 	bool facingRight = true;
 	bool lookingRight = true;
 
-	public Transform sprite;
+	//public Transform sprite;
 
 	//variable set when player dies
 	public bool isDead;
 
+	public bool attacked = false;
 
-	void Start () {
-	
-	}
+	public bool moving = false;
 	
 	// Update is called once per frame
 	void Update () {
 		if (!isDead) {
-		//Get the horizontal and vertical inputs
-		//positive = 1, negative = -1, no input = 0;
-
-		h = Input.GetAxis(playerNum + "_h");
-		v = Input.GetAxis(playerNum + "_v");
-		//add forces to the player based on these inputs
-		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.right * h * speed);
-		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * v * speed);
 		//if moving, set animation bool
-		if (h !=0 || v != 0) {
+			if (moving) {
 			gameObject.GetComponent<Animator>().SetBool("moving", true);
+			} else {
+				gameObject.GetComponent<Animator>().SetBool("moving", false);
+			}
 		} else {
-			gameObject.GetComponent<Animator>().SetBool("moving", false);
+			gameObject.GetComponent<Animator>().SetTrigger("death");
 		}
-		//get attack button input, then set attack trigger
-		if (Input.GetButtonDown(playerNum + "_attack")){
-			gameObject.GetComponent<Animator>().SetTrigger("attack");
-		}
-
-
-		flipMe(sprite);
-		}
+		
 	}
 
 	public void knockMeBack (Vector3 direction) {
@@ -63,7 +41,7 @@ public class playerControllerMovement : MonoBehaviour {
 	}
 
 	void flipMe(Transform sprite) {
-
+		/*
 		if (h > 0) {
 			lookingRight = false;
 		} else {
@@ -89,5 +67,6 @@ public class playerControllerMovement : MonoBehaviour {
 			}
 			
 		}
+		*/
 	}
 }

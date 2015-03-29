@@ -20,6 +20,17 @@ public class hurtOther : MonoBehaviour {
 			float vMod = other.gameObject.GetComponent<playerControllerMovement>().v;
 			Vector3 direction = new Vector3(-hMod, -vMod, 0);
 			other.gameObject.GetComponent<playerControllerMovement>().knockMeBack(direction);
+		}  
+	}
+
+	void OnTriggerEnter2D (Collider2D other) {
+
+		if (other.gameObject.tag == "Enemy") {
+			other.gameObject.GetComponent<health>().hurtMe(damage);
+			float hMod = transform.parent.transform.parent.gameObject.GetComponent<playerControllerMovement>().h;
+			float vMod = transform.parent.transform.parent.gameObject.GetComponent<playerControllerMovement>().v;
+			Vector3 direction = new Vector3(hMod, vMod, 0);
+			other.gameObject.GetComponent<enemyMotor>().knockMeBack(direction);
 		}
 	}
 }
