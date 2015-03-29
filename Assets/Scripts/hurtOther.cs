@@ -3,6 +3,9 @@ using System.Collections;
 
 public class hurtOther : MonoBehaviour {
 	public int damage;
+	public bool isPlayers = true;
+	public GameObject player;
+	public bool isBullet = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,8 +17,9 @@ public class hurtOther : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {
-		other.gameObject.GetComponent<health>().hurtMe(damage);
-		if (other.gameObject.tag == "Player") {
+		
+		if (other.gameObject.tag == "Player" && !isPlayers) {
+			other.gameObject.GetComponent<health>().hurtMe(damage);
 			float hMod = other.gameObject.GetComponent<playerControllerMovement>().h;
 			float vMod = other.gameObject.GetComponent<playerControllerMovement>().v;
 			Vector3 direction = new Vector3(-hMod, -vMod, 0);
@@ -27,10 +31,14 @@ public class hurtOther : MonoBehaviour {
 
 		if (other.gameObject.tag == "Enemy") {
 			other.gameObject.GetComponent<health>().hurtMe(damage);
-			float hMod = transform.parent.transform.parent.gameObject.GetComponent<playerControllerMovement>().h;
-			float vMod = transform.parent.transform.parent.gameObject.GetComponent<playerControllerMovement>().v;
+			float hMod = player.GetComponent<playerControllerMovement>().h;
+			float vMod = player.GetComponent<playerControllerMovement>().v;
 			Vector3 direction = new Vector3(hMod, vMod, 0);
 			other.gameObject.GetComponent<enemyMotor>().knockMeBack(direction);
+
+			if(isBullet){
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }
