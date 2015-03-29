@@ -15,17 +15,27 @@ public class playerControllerMovement : MonoBehaviour {
 	public float v;
 	//The Player number for 
 	public string playerNum = "player1";
+
+	//variables for the sprite flipper
 	bool facingRight = true;
 	bool lookingRight = true;
-	// Use this for initialization
+
+	public Transform sprite;
+
+	//variable set when player dies
+	public bool isDead;
+
+
 	void Start () {
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (!isDead) {
 		//Get the horizontal and vertical inputs
 		//positive = 1, negative = -1, no input = 0;
+
 		h = Input.GetAxis(playerNum + "_h");
 		v = Input.GetAxis(playerNum + "_v");
 		//add forces to the player based on these inputs
@@ -43,8 +53,8 @@ public class playerControllerMovement : MonoBehaviour {
 		}
 
 
-		//flipMe();
-
+		flipMe(sprite);
+		}
 	}
 
 	public void knockMeBack (Vector3 direction) {
@@ -52,7 +62,7 @@ public class playerControllerMovement : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().AddForce(direction * knockBack);
 	}
 
-	void flipMe() {
+	void flipMe(Transform sprite) {
 
 		if (h > 0) {
 			lookingRight = false;
@@ -63,18 +73,18 @@ public class playerControllerMovement : MonoBehaviour {
 		if ( lookingRight) {
 			
 			if (facingRight) {
-				Vector3 theScale = transform.localScale;
+				Vector3 theScale = sprite.localScale;
 				theScale.x *= -1;
-				transform.localScale = theScale;
+				sprite.localScale = theScale;
 				facingRight = false;
 			}
 			
 		} else {
 			
 			if (!facingRight) {
-				Vector3 theScale = transform.localScale;
+				Vector3 theScale = sprite.localScale;
 				theScale.x *= -1;
-				transform.localScale = theScale;
+				sprite.localScale = theScale;
 				facingRight = true;
 			}
 			

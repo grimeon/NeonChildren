@@ -38,7 +38,8 @@ public class health : MonoBehaviour {
 		light.GetComponent<Light>().intensity = currenthealth / 2;
 		//killMe when dead
 		if (currenthealth <= 0) {
-			Destroy(this.gameObject);
+			gameObject.GetComponent<Animator>().SetTrigger("death");
+			gameObject.GetComponent<playerControllerMovement>().isDead = true;
 		}
 	}
 
