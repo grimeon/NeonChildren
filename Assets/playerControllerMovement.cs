@@ -43,7 +43,7 @@ public class playerControllerMovement : MonoBehaviour {
 		}
 
 
-		flipMe();
+		//flipMe();
 
 	}
 
